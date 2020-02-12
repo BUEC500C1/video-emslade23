@@ -1,3 +1,6 @@
 # emslade23's Video Assignment
 
-1. Run the example code on: https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python
+### Tasks
+1. Run the example code on: https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python. Then, compare multi-threading and multi-processing. See task1 folder.
+
+2. 
