@@ -20,8 +20,12 @@ nthreads CpuThread CpuProcess IoThread IoProcess
 
     - higher overhead
     - used for tasks that require high CPU computational resources
+    - avoids GIL limitations in CPython
+    - takes advantage of multiple CPUs and cores
 
 ### Multi-threading
 
     - Used for Input/Output tasks
-    - GIL serializes in CPython
+    - make responsive UIs
+    - light weight
+    - shared memory
