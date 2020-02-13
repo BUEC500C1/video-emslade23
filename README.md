@@ -1,5 +1,6 @@
 # emslade23's Video Assignment
 
+<<<<<<< HEAD
 1. Run the example code on: https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python
 
 ## running: python3 threadsVprocess.py 10
@@ -32,3 +33,9 @@ nthreads CpuThread CpuProcess IoThread IoProcess
     - make responsive UIs
     - light weight
     - shared memory
+=======
+### Tasks
+1. Run the example code on: https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python. Then, compare multi-threading and multi-processing. See task1 folder.
+
+2. 
+>>>>>>> 61ba4f515549c7082eb1f655802ebd5081e29b55
