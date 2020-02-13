@@ -2,10 +2,10 @@
 
 1. Run the example code on: https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python
 
-## running: python3 threadsVprocess.py 10
+##### running: python3 threadsVprocess.py 10
 (10 being the number of iterations)
 
-### gives us:
+##### gives us:
 
 '''
 nthreads CpuThread CpuProcess IoThread IoProcess
