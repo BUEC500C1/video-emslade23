@@ -29,3 +29,5 @@
     - make responsive UIs
     - light weight
     - shared memory
+
+## Main Exercise: given a twitter handle, display tweets in a video using FFMPEG
