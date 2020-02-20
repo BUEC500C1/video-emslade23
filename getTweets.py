@@ -18,7 +18,9 @@ def getTweetText(twitterHandle, numberOfTweets):
     tweetList = list()
 
     # post is the entire element from api, tweet is the plain text tweet with links
-    for post in tweepy.Cursor(api.user_timeline, screen_name=twitterHandle, tweet_mode="extended").items(numberOfTweets):
+    for post in tweepy.Cursor(api.user_timeline, screen_name=twitterHandle, tweet_mode="extended", include_entities=True).items(numberOfTweets):
+        if 'media' in post.entities:
+            print("IMAGEEEE")
         print(post.full_text)
         tweetList.append(post.full_text)
     #print("\n\n\n\n\n\n\n")
@@ -58,9 +60,9 @@ def convertImagestoVideo():
 
 def main():
     twitterHandle = '@elonmusk'
-    results = getTweetText(twitterHandle, 1)
+    results = getTweetText(twitterHandle, 4)
     time.sleep(2)
     createImagesOfTweets(twitterHandle, results)
-    convertImagestoVideo()
+    #convertImagestoVideo()
 
 main()
