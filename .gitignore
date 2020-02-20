@@ -1,1 +1,4 @@
 env/
+config1.py
+__*
+.pytest_*
