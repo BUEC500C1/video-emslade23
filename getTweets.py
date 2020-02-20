@@ -9,6 +9,7 @@ import config
 import subprocess
 
 
+
 auth = tweepy.OAuthHandler(config.consumerKey, config.consumerSecretKey)
 auth.set_access_token(config.accessToken, config.accessSecretToken)
 api = tweepy.API(auth)
@@ -53,16 +54,13 @@ def createImagesOfTweets(twitterHandle, tweetList):
         counter += 1
 
 def convertImagestoVideo():
-    subprocess.run('ffmpeg -r .3 -f image2 -s 1920x1080 -i frame%d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p test.mp4')
+    subprocess.run('ffmpeg -r .3 -f image2 -s 1920x1080 -i frame%d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p test2.mp4', cwd="/Users/elizabeth./Documents/code/ec500/video-emslade23/photos")
 
 def main():
     twitterHandle = '@elonmusk'
     results = getTweetText(twitterHandle, 1)
     time.sleep(2)
     createImagesOfTweets(twitterHandle, results)
-   # convertImagestoVideo()
-    print(subprocess.run('cd photos').stdout)
+    convertImagestoVideo()
 
 main()
-
-# ffmpeg -r 1 -f image2 -s 1920x1080 -i frame%d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p test.mp4
