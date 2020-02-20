@@ -53,7 +53,7 @@ def createImagesOfTweets(twitterHandle, tweetList):
         counter += 1
 
 def convertImagestoVideo():
-    subprocess.run('ffmpeg -r 1 -f image2 -s 1920x1080 -i frame%d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p test.mp4')
+    subprocess.run('ffmpeg -r .3 -f image2 -s 1920x1080 -i frame%d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p test.mp4')
 
 def main():
     twitterHandle = '@elonmusk'
@@ -61,7 +61,7 @@ def main():
     time.sleep(2)
     createImagesOfTweets(twitterHandle, results)
    # convertImagestoVideo()
-    print(subprocess.run('ls').stdout)
+    print(subprocess.run('cd photos').stdout)
 
 main()
 
