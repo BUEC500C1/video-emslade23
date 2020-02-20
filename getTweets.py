@@ -5,12 +5,12 @@ from PIL import Image, ImageDraw, ImageFont
 import datetime
 import time
 import tweepy
-import config
+import config1
 import subprocess
 
 
-auth = tweepy.OAuthHandler(config.consumerKey, config.consumerSecretKey)
-auth.set_access_token(config.accessToken, config.accessSecretToken)
+auth = tweepy.OAuthHandler(config1.consumerKey, config1.consumerSecretKey)
+auth.set_access_token(config1.accessToken, config1.accessSecretToken)
 api = tweepy.API(auth)
 
 def getTweetText(twitterHandle, numberOfTweets):
