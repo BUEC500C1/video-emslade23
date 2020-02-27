@@ -5,19 +5,20 @@ from PIL import Image, ImageDraw, ImageFont
 import datetime
 import time
 import tweepy
-import config
 import queue
 import subprocess
 import threading
-import urllib
 import requests
+import shutil
 from io import BytesIO
 
+shutil.copy('keys', 'keys.py')
+from keys import *
 
 q = queue.Queue()
 
-auth = tweepy.OAuthHandler(config.consumerKey, config.consumerSecretKey)
-auth.set_access_token(config.accessToken, config.accessSecretToken)
+auth = tweepy.OAuthHandler(consumerKey, consumerSecretKey)
+auth.set_access_token(accessToken, accessSecretToken)
 api = tweepy.API(auth)
 
 # twitter api
@@ -33,7 +34,7 @@ def getTweetText(twitterHandle, numberOfTweets):
                     imgsOfTweets.append(element['media_url_https'])
         else:
             imgsOfTweets.append('0')
-        #print(post.full_text)
+        print(post.full_text)
         textOfTweets.append(post.full_text)
     return [textOfTweets, imgsOfTweets]
 
@@ -45,7 +46,7 @@ def callback(foo):
 def get_feed(twitterFeed, callback): # for each twitter handle, we must add the task of getting their tweets to the queue
     while True:
         twitterFeedList = q.get()
-        print(" feed: ", twitterFeedList)
+        #print(" feed: ", twitterFeedList)
         createImagesOfTweets(twitterFeedList)
         time.sleep(0.5)
         q.task_done()
@@ -78,7 +79,7 @@ def insertNewLines(tweet):
         if len(tweet)-i < 60:
             revisedTweet = revisedTweet + tweet[i:len(tweet)]
 
-    print("REVISED: "+ revisedTweet)
+    #print("REVISED: "+ revisedTweet)
     return revisedTweet
 
 def createImagesOfTweets(twitterHandle, textOfTweets, imgsOfTweets):
@@ -107,13 +108,14 @@ def convertImagestoVideo():
     result = subprocess.run('ffmpeg -r .3 -f image2 -s 1920x1080 -i frame%d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p test2.mp4', cwd="/Users/elizabeth./Documents/code/ec500/video-emslade23/photos")
     return result.stdout
 
-
+def cleanPhotos():
+    result = subprocess.run('rm *', cwd="/Users/elizabeth./Documents/code/ec500/video-emslade23/photos")
 
 def main():
-    twitterHandle = '@elonmusk'
+    twitterHandle = '@realDonaldTrump'
     textOfTweets, imgsOfTweets = getTweetText(twitterHandle, 7) # eventually returns 2 things tweet text and image tweets
-    print(textOfTweets)
-    print(imgsOfTweets)
+    #print(textOfTweets)
+    #print(imgsOfTweets)
     createImagesOfTweets(twitterHandle, textOfTweets, imgsOfTweets)
 
     stdout = convertImagestoVideo()
