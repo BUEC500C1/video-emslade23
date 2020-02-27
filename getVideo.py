@@ -52,5 +52,6 @@ def main():
     for i in range(0, len(twitterHandles)):
         userTweetsObj = userTweets(consumer_key, consumer_secret, access_token, access_token_secret, twitterHandles[i], numberOfTweetsArray[i], directoryNameArray[i])
         worker = threads(userTweetsObj)
+        globalProcesses.twitterCompletedTasks[i] = False
 
 main()
