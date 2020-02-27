@@ -1,6 +1,6 @@
 # emslade23's Video Assignment
 
-## Run the example code on: https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python
+Run the example code on: https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python
 
 - running: python3 threadsVprocess.py 10
 (10 being the number of iterations)
