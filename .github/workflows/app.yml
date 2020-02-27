@@ -27,5 +27,5 @@ jobs:
         # flake8 . --count --exit-zero --max-complexity=10 --statistics
     - name: Test with pytest
       run: |
-        pip install pytest
+        pip3 install pytest
         pytest test_app.py 
