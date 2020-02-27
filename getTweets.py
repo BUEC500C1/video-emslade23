@@ -7,10 +7,9 @@ import subprocess
 import time
 import globalProcesses 
 import os
+import shutil
 
 class userTweets:
-    textOfTweets = list()
-    imagesOfTweets = list()
     
     def __init__(self, consumer_key, consumer_secret, access_token, access_token_secret, twitterHandle, numberOfTweets, directory):
         self.consumer_key = consumer_key
@@ -23,14 +22,20 @@ class userTweets:
         auth.set_access_token(access_token, access_token_secret)
         self.api = tweepy.API(auth)
         self.directory = directory
+        self.textOfTweets = []
+        self.imagesOfTweets = []
         
     def getTweetDataAndCreateVideo(self):
-        os.mkdir(self.directory)
+        if os.path.exists(self.directory):
+            self.deletePhotosFolder()
+            os.mkdir(self.directory)
+        else:
+            os.mkdir(self.directory)
         self.getTweetData()
         self.createImagesofTweets()
         self.convertImagestoVideo()
         globalProcesses.twitterQueue.task_done()
-        print("completed task for " + self.twitterHandle)
+        print("A thread for " + self.twitterHandle + " has completed. Video is in folder " + self.directory + ". \n Path to video: "+ os.getcwd()+"/"+ self.directory)
         
         
     def getTweetData(self):
@@ -70,14 +75,12 @@ class userTweets:
 
             
             img.save(path+'/'+self.directory+'/frame'+str(counter)+'.png')
-            #img.save('/Users/elizabeth./Documents/code/ec500/video-emslade23/photos/frame'+str(counter)+'.png')
             counter += 1
             
             if self.imagesOfTweets[indexArray] != '0':
                 response = requests.get(self.imagesOfTweets[indexArray])
                 img = Image.open(BytesIO(response.content))
                 img.save(path+'/'+self.directory+'/frame'+str(counter)+'.png')
-                #img.save('/Users/elizabeth./Documents/code/ec500/video-emslade23/photos/frame'+str(counter)+'.png')
                 counter += 1
             indexArray += 1
     
@@ -86,7 +89,7 @@ class userTweets:
         result = subprocess.run('ffmpeg -r .3 -f image2 -s 1920x1080 -i frame%d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p test2.mp4', cwd=path+'/'+self.directory+'/')
         return result.stdout
     
-    def cleanPhotosFolder(self):
-        result = subprocess.run('rm *', cwd="/Users/elizabeth./Documents/code/ec500/video-emslade23/photos")
-        time.sleep(1)
-        return result.stdout
+    def deletePhotosFolder(self):
+        path = os.getcwd()
+        shutil.rmtree(path+'/'+self.directory+'/')
+        
