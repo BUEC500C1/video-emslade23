@@ -47,7 +47,7 @@ class userTweets:
             else:
                 self.imagesOfTweets.append('0')
             self.textOfTweets.append(post.full_text)
-        #print("TEXT:", self.textOfTweets)
+        print("Tweets: ", self.textOfTweets)
     
     def insertNewLines(self, tweet):
         if len(tweet) < 60:
@@ -81,7 +81,7 @@ class userTweets:
                 img = Image.open(BytesIO(response.content))
                 img.save(path+'/'+self.directory+'/frame'+str(counter)+'.png')
                 counter += 1
-            indexArray += 1
+                indexArray += 1
         globalProcesses.twitterCompletedTasks[self.twitterHandle] = "50% Complete"
         print("**********************************")
         print("Current Status of all Threads:")
