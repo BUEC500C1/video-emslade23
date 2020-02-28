@@ -15,6 +15,9 @@ you will be prompted to type in twitter handle, number of tweets you want and la
         
         example: @elonmusk,5,helloMusk
 
+
+3. to test, run pytest test_app.py
+
 ## Tasks:
     - get twitter API working so that given a twitter handle, it returns plain text tweets
     - implement a queue and threading system
