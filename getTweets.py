@@ -24,13 +24,16 @@ class userTweets:
         self.directory = directory
         self.textOfTweets = []
         self.imagesOfTweets = []
-        
-    def getTweetDataAndCreateVideo(self):
+    
+    def makeDirectory(self):
         if os.path.exists(self.directory):
             self.deletePhotosFolder()
             os.mkdir(self.directory)
         else:
             os.mkdir(self.directory)
+
+    def getTweetDataAndCreateVideo(self):
+        self.makeDirectory()
         self.getTweetData()
         self.createImagesofTweets()
         self.convertImagestoVideo()

@@ -10,7 +10,6 @@ import shutil
 import globalProcesses as gp
 from getTweets import userTweets
 
-#if no keys, then import default *****
 shutil.copy('keys', 'keys.py')
 from keys import *
       
