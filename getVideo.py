@@ -25,10 +25,12 @@ def userTasks():
     print("Hello, welcome to Lizzy's Twitter Video API!")
     print("Directions: when you are done inputting Twitter Handles, type q")
     while True:
-        userInput = input("Please Input @twitterhandle, NumberOfTweets, folderName to create in current directory: \n (For Example: @elonmusk,10, muskVideo): ").split(', ')
+        userInput = input("Please Input @twitterhandle, NumberOfTweets, folderName to create in current directory: \n (Like this example: @elonmusk, 10, muskVideo): ").split(', ')
         if len(userInput) == 3:
             if userInput[0][0] != "@":
                 print("Invalid Twitter Handle Structure. Try Again. \n \n")
+            elif userInput[1].isnumeric() == False:
+                print("Invalid, input a positive integer for number of tweets.")
             else:
                 print("Your Input: "+ str(userInput))
                 gp.twitterHandles.append(userInput[0])
