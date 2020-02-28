@@ -35,8 +35,7 @@ class userTweets:
         self.createImagesofTweets()
         self.convertImagestoVideo()
         globalProcesses.twitterQueue.task_done()
-        print("A thread for " + self.twitterHandle + " has completed. Video is in folder " + self.directory + ". \n Path to video: "+ os.getcwd()+"/"+ self.directory)
-        
+        print("\n A thread for " + self.twitterHandle + " has completed. Path to video: " + os.getcwd() + "/" + self.directory + "\n")
         
     def getTweetData(self):
         # post is the entire element from api, tweet is the plain text tweet with links
@@ -48,7 +47,7 @@ class userTweets:
             else:
                 self.imagesOfTweets.append('0')
             self.textOfTweets.append(post.full_text)
-        print("TEXT:", self.textOfTweets)
+        #print("TEXT:", self.textOfTweets)
     
     def insertNewLines(self, tweet):
         if len(tweet) < 60:
@@ -83,10 +82,22 @@ class userTweets:
                 img.save(path+'/'+self.directory+'/frame'+str(counter)+'.png')
                 counter += 1
             indexArray += 1
+        globalProcesses.twitterCompletedTasks[self.twitterHandle] = "50% Complete"
+        print("**********************************")
+        print("Current Status of all Threads:")
+        for x in globalProcesses.twitterCompletedTasks:
+            print(x+ ": "+ globalProcesses.twitterCompletedTasks[x])
+        print("**********************************")
     
     def convertImagestoVideo(self):
         path = os.getcwd()
         result = subprocess.run('ffmpeg -r .3 -f image2 -s 1920x1080 -i frame%d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p test2.mp4', cwd=path+'/'+self.directory+'/')
+        globalProcesses.twitterCompletedTasks[self.twitterHandle] = "100% Complete"
+        print("**********************************")
+        print("Current Status of all Processes:")
+        for x in globalProcesses.twitterCompletedTasks:
+            print(x+ ": "+ globalProcesses.twitterCompletedTasks[x])
+        print("**********************************")
         return result.stdout
     
     def deletePhotosFolder(self):
