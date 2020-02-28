@@ -3,6 +3,7 @@
 given a twitter handle, display tweets in a video using FFMPEG
 
 
+
 ## How to Run:
 
 1. pip install -r requirements.txt
@@ -17,6 +18,8 @@ you will be prompted to type in twitter handle, number of tweets you want and la
 
 
 3. to test, run pytest test_app.py
+
+        please note that even though in the actions, pytest fails, running it locally works.
 
 ## Tasks:
     - get twitter API working so that given a twitter handle, it returns plain text tweets
