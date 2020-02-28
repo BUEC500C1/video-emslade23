@@ -14,7 +14,7 @@ consumer_secret, access_token, access_token_secret.
 
 you will be prompted to type in twitter handle, number of tweets you want and lastly the directory you want to be created.
         
-        example: @elonmusk,5,helloMusk
+        example: @elonmusk, 5, helloMusk
 
 
 3. to test, run pytest test_app.py
